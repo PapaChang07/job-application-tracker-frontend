@@ -3,6 +3,8 @@ import JobList from './components/JobList.jsx';
 import AddJobForm from "./components/AddJobForm";
 import EditJobForm from './components/EditJobForm.jsx';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function App() {
   const [jobs, setJobs] = useState([]);
   const [editingJob, setEditingJob] = useState(null);
@@ -18,7 +20,7 @@ function App() {
   }, []);
 
   const fetchJobs = async () => {
-    const res = await fetch("http://localhost:5000/jobs");
+    const res = await fetch(`${API_URL}/jobs`);
     const data = await res.json();
     setJobs(data);
   };
@@ -61,7 +63,7 @@ function App() {
   const handleDelete = async (jobId) => {
     setJobs(prev => prev.filter(j => j.id !== jobId));
     try {
-      const res = await fetch(`http://localhost:5000/jobs/${jobId}`, { method: "DELETE" });
+      const res = await fetch(`${API_URL}/jobs/${jobId}`, { method: "DELETE" });
       if (!res.ok) throw new Error("Delete failed");
     } catch (err) {
       // rollback if delete failed – re-fetch or restore

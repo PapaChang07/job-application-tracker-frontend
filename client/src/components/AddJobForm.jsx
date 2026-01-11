@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function AddJobForm({ onJobAdded }) {
   const [formData, setFormData] = useState({
     company: "",
@@ -38,7 +40,7 @@ export default function AddJobForm({ onJobAdded }) {
 
     setErrors({});
 
-    const res = await fetch("http://localhost:5000/jobs", {
+    const res = await fetch(`${API_URL}/jobs`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),

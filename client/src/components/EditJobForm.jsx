@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function EditJobForm({ job, onSave, onCancel }) {
   const [formData, setFormData] = useState({
     company: job.company || "",
@@ -17,7 +19,7 @@ export default function EditJobForm({ job, onSave, onCancel }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:5000/jobs/${job.id}`, {
+      const response = await fetch(`${API_URL}/jobs${job.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)
