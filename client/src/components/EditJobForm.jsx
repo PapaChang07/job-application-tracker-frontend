@@ -19,6 +19,8 @@ export default function EditJobForm({ job, onSave, onCancel }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log("PUT URL:", `${API_URL}/jobs/${job.id}`);
+      console.log("job.id:", job.id);
       const response = await fetch(`${API_URL}/jobs/${job.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
