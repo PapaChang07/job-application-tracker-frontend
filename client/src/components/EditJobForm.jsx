@@ -30,7 +30,7 @@ export default function EditJobForm({ job, onSave, onCancel }) {
       if (!response.ok) {
         throw new Error("Failed to update job");
       }
-
+      console.log("Nice Job!")
       const updatedJob = await response.json();
       onSave(updatedJob);
     } catch (error) {
